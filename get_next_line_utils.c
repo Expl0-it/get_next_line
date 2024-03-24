@@ -6,7 +6,8 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:01:01 by mamichal          #+#    #+#             */
-/*   Updated: 2024/03/24 12:01:03 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:09:12 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./get_next_line.h"
