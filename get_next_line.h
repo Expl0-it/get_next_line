@@ -6,13 +6,15 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:01:06 by mamichal          #+#    #+#             */
-/*   Updated: 2024/03/25 13:35:13 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:47:54 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+// malloc, free, NULL
+# include <stdlib.h>
 // input output system calls
 # include <unistd.h>
 // file options
@@ -26,7 +28,7 @@
 // linked list to hold file content
 typedef struct s_list
 {
-	void			*content;
+	char			*content;
 	struct s_list	*next;
 }			t_list;
 
@@ -38,5 +40,14 @@ typedef struct s_list
  * NULL on error or if there is nothing left to be read
  */
 char	*get_next_line(int fd);
+void	alloc_list(t_list **list, int fd);
+int		found_nl(t_list *list);
+void	list_append(t_list **list, char *buf);
+char	*get_line(t_list *list);
+int		len_to_nl(t_list *list);
+void	copy_content_to_nl(t_list *list, char *line);
+t_list	*ft_lstlast(t_list *lst);
+void	clear_list_till_nl(t_list **list);
+void	dealloc_list(t_list **list, t_list *clean_node, char *buf);
 
 #endif
