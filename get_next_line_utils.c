@@ -31,3 +31,14 @@ int	found_nl(t_list *list)
 	return (0);
 }
 
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (NULL == lst)
+		return (NULL);
+	while (NULL != lst->next)
+	{
+		lst = lst->next;
+	}
+	return (lst);
+}
+
