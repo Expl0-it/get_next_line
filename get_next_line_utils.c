@@ -68,3 +68,29 @@ int	len_to_nl(t_list *list)
 	return (len);
 }
 
+void	copy_content_to_nl(t_list *list, char *line)
+{
+	int	i_line;
+	int	i_content;
+
+	if (NULL == list || NULL == line)
+		return ;
+	i_line = 0;
+	while (list)
+	{
+		i_content = 0;
+		while (list->content[i_content])
+		{
+			if (list->content[i_content] == '\n')
+			{
+				line[i_line++] = '\n';
+				line[i_line] = 0;
+				return ;
+			}
+			line[i_line++] = list->content[i_content++];
+		}
+		list = list->next;
+	}
+	line[i_line] = 0;
+}
+
