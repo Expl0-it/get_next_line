@@ -42,3 +42,29 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
+int	len_to_nl(t_list *list)
+{
+	int	i;
+	int	len;
+
+	if (NULL == list)
+		return (0);
+	len = 0;
+	while (list)
+	{
+		i = 0;
+		while (list->content[i])
+		{
+			if (list->content[i] == '\n')
+			{
+				len++;
+				return (len);
+			}
+			i++;
+			len++;
+		}
+		list = list->next;
+	}
+	return (len);
+}
+
