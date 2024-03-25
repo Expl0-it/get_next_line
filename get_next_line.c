@@ -26,6 +26,27 @@ char	*get_next_line(int fd)
 	clear_list_till_nl(&list);
 	return (next_line);
 }
+
+void	alloc_list(t_list **list, int fd)
+{
+	int		bytes_read;
+	char	*buf;
+
+	while (!found_nl(*list))
+	{
+		buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (NULL == buf)
+			return ;
+		bytes_read = read(fd, buf, BUFFER_SIZE);
+		if (!bytes_read)
+		{
+			free(buf);
+			return ;
+		}
+		buf[bytes_read] = 0;
+		list_append(list, buf);
+	}
+}
 	char	*line;
 
 	if (BUFFER_SIZE < 1 || fd < 0)
