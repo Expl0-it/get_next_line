@@ -14,6 +14,18 @@
 
 char	*get_next_line(int fd)
 {
+	static t_list	*list = NULL;
+	char			*next_line;
+
+	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, &next_line, 0) < 0)
+		return (NULL);
+	alloc_list(&list, fd);
+	if (NULL == list)
+		return (NULL);
+	next_line = get_line(list);
+	clear_list_till_nl(&list);
+	return (next_line);
+}
 	char	*line;
 
 	if (BUFFER_SIZE < 1 || fd < 0)
