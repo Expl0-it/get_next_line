@@ -6,7 +6,7 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:01:06 by mamichal          #+#    #+#             */
-/*   Updated: 2024/03/24 18:15:49 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:35:13 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 // file options
 # include <fcntl.h>
 
-// modifiable size for buffer
-# define BUFFER_SIZE 4096
+// compile time modifiable size for buffer
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4096
+# endif
 
 // linked list to hold file content
 typedef struct s_list
