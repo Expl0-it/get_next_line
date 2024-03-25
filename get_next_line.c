@@ -47,6 +47,23 @@ void	alloc_list(t_list **list, int fd)
 		list_append(list, buf);
 	}
 }
+
+void	list_append(t_list **list, char *buf)
+{
+	t_list	*last_node;
+	t_list	*new_node;
+
+	last_node = ft_lstlast(*list);
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (NULL == new_node)
+		return ;
+	if (NULL == last_node)
+		*list = new_node;
+	else
+		last_node->next = new_node;
+	new_node->content = (char *)buf;
+	new_node->next = NULL;
+}
 	char	*line;
 
 	if (BUFFER_SIZE < 1 || fd < 0)
