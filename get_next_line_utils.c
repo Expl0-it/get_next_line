@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "./get_next_line.h"
+
 int	found_nl(t_list *list)
 {
 	int	i;
@@ -94,3 +95,25 @@ void	copy_content_to_nl(t_list *list, char *line)
 	line[i_line] = 0;
 }
 
+void	dealloc_list(t_list **list, t_list *clean_node, char *buf)
+{
+	t_list	*tmp;
+
+	if (NULL == list)
+		return ;
+	while (*list)
+	{
+		tmp = (*list)->next;
+		free((*list)->content);
+		free(*list);
+		*list = tmp;
+	}
+	*list = NULL;
+	if (clean_node->content[0])
+		*list = clean_node;
+	else
+	{
+		free(buf);
+		free(clean_node);
+	}
+}

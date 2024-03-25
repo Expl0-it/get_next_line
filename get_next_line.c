@@ -6,7 +6,7 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:00:55 by mamichal          #+#    #+#             */
-/*   Updated: 2024/03/24 18:19:05 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:47:03 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,43 @@ void	list_append(t_list **list, char *buf)
 	new_node->content = (char *)buf;
 	new_node->next = NULL;
 }
+
+char	*get_line(t_list *list)
+{
+	int		len;
 	char	*line;
 
-	if (BUFFER_SIZE < 1 || fd < 0)
+	if (NULL == list)
 		return (NULL);
+	len = len_to_nl(list);
+	line = (char *)malloc((len + 1) * sizeof(char));
+	if (NULL == line)
+		return (NULL);
+	copy_content_to_nl(list, line);
 	return (line);
+}
+
+void	clear_list_till_nl(t_list **list)
+{
+	t_list	*last_node;
+	t_list	*clean_node;
+	int		i_con;
+	int		i_buf;
+	char	*buf;
+
+	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	clean_node = (t_list *)malloc(sizeof(t_list));
+	if (NULL == buf || NULL == clean_node)
+		return ;
+	last_node = ft_lstlast(*list);
+	i_con = 0;
+	i_buf = 0;
+	while (last_node->content[i_con] && last_node->content[i_con] != '\n')
+		i_con++;
+	while (last_node->content[i_con] && last_node->content[++i_con])
+		buf[i_buf++] = last_node->content[i_con];
+	buf[i_buf] = 0;
+	clean_node->content = buf;
+	clean_node->next = NULL;
+	dealloc_list(list, clean_node, buf);
 }
