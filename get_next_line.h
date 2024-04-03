@@ -6,7 +6,7 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:01:06 by mamichal          #+#    #+#             */
-/*   Updated: 2024/03/25 15:47:54 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:03:48 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ typedef struct s_list
  * NULL on error or if there is nothing left to be read
  */
 char	*get_next_line(int fd);
-void	alloc_list(t_list **list, int fd);
+//void	alloc_list(t_list **list, int fd);
 int		found_nl(t_list *list);
-void	list_append(t_list **list, char *buf);
-char	*get_line(t_list *list);
+//void	list_append(t_list **list, char *buf);
+//char	*get_line(t_list *list);
 int		len_to_nl(t_list *list);
 void	copy_content_to_nl(t_list *list, char *line);
 t_list	*ft_lstlast(t_list *lst);
-void	clear_list_till_nl(t_list **list);
+//void	clear_list_till_nl(t_list **list);
 void	dealloc_list(t_list **list, t_list *clean_node, char *buf);
 
 #endif

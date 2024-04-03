@@ -6,28 +6,30 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:00:55 by mamichal          #+#    #+#             */
-/*   Updated: 2024/03/25 15:47:03 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:19:24 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./get_next_line.h"
 
-char	*get_next_line(int fd)
+static void	list_append(t_list **list, char *buf)
 {
-	static t_list	*list = NULL;
-	char			*next_line;
+	t_list	*last_node;
+	t_list	*new_node;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, &next_line, 0) < 0)
-		return (NULL);
-	alloc_list(&list, fd);
-	if (NULL == list)
-		return (NULL);
-	next_line = get_line(list);
-	clear_list_till_nl(&list);
-	return (next_line);
+	last_node = ft_lstlast(*list);
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (NULL == new_node)
+		return ;
+	if (NULL == last_node)
+		*list = new_node;
+	else
+		last_node->next = new_node;
+	new_node->content = (char *)buf;
+	new_node->next = NULL;
 }
 
-void	alloc_list(t_list **list, int fd)
+static void	alloc_list(t_list **list, int fd)
 {
 	int		bytes_read;
 	char	*buf;
@@ -48,24 +50,7 @@ void	alloc_list(t_list **list, int fd)
 	}
 }
 
-void	list_append(t_list **list, char *buf)
-{
-	t_list	*last_node;
-	t_list	*new_node;
-
-	last_node = ft_lstlast(*list);
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (NULL == new_node)
-		return ;
-	if (NULL == last_node)
-		*list = new_node;
-	else
-		last_node->next = new_node;
-	new_node->content = (char *)buf;
-	new_node->next = NULL;
-}
-
-char	*get_line(t_list *list)
+static char	*get_line(t_list *list)
 {
 	int		len;
 	char	*line;
@@ -80,7 +65,8 @@ char	*get_line(t_list *list)
 	return (line);
 }
 
-void	clear_list_till_nl(t_list **list)
+// FIX: proper check on mallocs
+static void	clear_list_till_nl(t_list **list)
 {
 	t_list	*last_node;
 	t_list	*clean_node;
@@ -89,9 +75,14 @@ void	clear_list_till_nl(t_list **list)
 	char	*buf;
 
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	clean_node = (t_list *)malloc(sizeof(t_list));
-	if (NULL == buf || NULL == clean_node)
+	if (NULL == buf)
 		return ;
+	clean_node = (t_list *)malloc(sizeof(t_list));
+	if (NULL == clean_node)
+	{
+		free(buf);
+		return ;
+	}
 	last_node = ft_lstlast(*list);
 	i_con = 0;
 	i_buf = 0;
@@ -101,6 +92,20 @@ void	clear_list_till_nl(t_list **list)
 		buf[i_buf++] = last_node->content[i_con];
 	buf[i_buf] = 0;
 	clean_node->content = buf;
-	clean_node->next = NULL;
 	dealloc_list(list, clean_node, buf);
+}
+
+char	*get_next_line(int fd)
+{
+	static t_list	*list = NULL;
+	char			*next_line;
+
+	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, &next_line, 0) < 0)
+		return (NULL);
+	alloc_list(&list, fd);
+	if (NULL == list)
+		return (NULL);
+	next_line = get_line(list);
+	clear_list_till_nl(&list);
+	return (next_line);
 }
