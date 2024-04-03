@@ -6,7 +6,7 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:00:55 by mamichal          #+#    #+#             */
-/*   Updated: 2024/04/03 16:19:24 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:23:44 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static char	*get_line(t_list *list)
 	return (line);
 }
 
-// FIX: proper check on mallocs
 static void	clear_list_till_nl(t_list **list)
 {
 	t_list	*last_node;
