@@ -6,13 +6,13 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:01:01 by mamichal          #+#    #+#             */
-/*   Updated: 2024/04/03 16:19:29 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:52:08 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./get_next_line_bonus.h"
 
-int	found_nl(t_list *list)
+int	found_nl(t_str_list *list)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ int	found_nl(t_list *list)
 	return (0);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_str_list	*ft_lstlast(t_str_list *lst)
 {
 	if (NULL == lst)
 		return (NULL);
@@ -43,7 +43,7 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-int	len_to_nl(t_list *list)
+int	len_to_nl(t_str_list *list)
 {
 	int	i;
 	int	len;
@@ -69,7 +69,7 @@ int	len_to_nl(t_list *list)
 	return (len);
 }
 
-void	copy_content_to_nl(t_list *list, char *line)
+void	copy_content_to_nl(t_str_list *list, char *line)
 {
 	int	i_line;
 	int	i_content;
@@ -95,9 +95,9 @@ void	copy_content_to_nl(t_list *list, char *line)
 	line[i_line] = 0;
 }
 
-void	dealloc_list(t_list **list, t_list *clean_node, char *buf)
+void	dealloc_list(t_str_list **list, t_str_list *clean_node, char *buf)
 {
-	t_list	*tmp;
+	t_str_list	*tmp;
 
 	if (NULL != clean_node)
 		clean_node->next = NULL;
