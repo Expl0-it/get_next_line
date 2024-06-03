@@ -6,7 +6,7 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:00:55 by mamichal          #+#    #+#             */
-/*   Updated: 2024/06/03 13:50:50 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:30:49 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	list_append(t_str_list **list, char *buf)
 	t_str_list	*last_node;
 	t_str_list	*new_node;
 
-	last_node = ft_lstlast(*list);
+	last_node = ft_str_lstlast(*list);
 	new_node = (t_str_list *)malloc(sizeof(t_str_list));
 	if (NULL == new_node)
 		return ;
@@ -82,7 +82,7 @@ static void	clear_list_till_nl(t_str_list **list)
 		free(buf);
 		return ;
 	}
-	last_node = ft_lstlast(*list);
+	last_node = ft_str_lstlast(*list);
 	i_con = 0;
 	i_buf = 0;
 	while (last_node->content[i_con] && last_node->content[i_con] != '\n')

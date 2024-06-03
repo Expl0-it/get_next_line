@@ -6,7 +6,7 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:01:01 by mamichal          #+#    #+#             */
-/*   Updated: 2024/06/03 13:50:52 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:31:05 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	found_nl(t_str_list *list)
 	return (0);
 }
 
-t_str_list	*ft_lstlast(t_str_list *lst)
+t_str_list	*ft_str_lstlast(t_str_list *lst)
 {
 	if (NULL == lst)
 		return (NULL);
