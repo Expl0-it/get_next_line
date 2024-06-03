@@ -6,19 +6,19 @@
 /*   By: mamichal <mamichal@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:00:55 by mamichal          #+#    #+#             */
-/*   Updated: 2024/04/03 16:23:44 by mamichal         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:50:50 by mamichal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./get_next_line.h"
 
-static void	list_append(t_list **list, char *buf)
+static void	list_append(t_str_list **list, char *buf)
 {
-	t_list	*last_node;
-	t_list	*new_node;
+	t_str_list	*last_node;
+	t_str_list	*new_node;
 
 	last_node = ft_lstlast(*list);
-	new_node = (t_list *)malloc(sizeof(t_list));
+	new_node = (t_str_list *)malloc(sizeof(t_str_list));
 	if (NULL == new_node)
 		return ;
 	if (NULL == last_node)
@@ -29,7 +29,7 @@ static void	list_append(t_list **list, char *buf)
 	new_node->next = NULL;
 }
 
-static void	alloc_list(t_list **list, int fd)
+static void	alloc_list(t_str_list **list, int fd)
 {
 	int		bytes_read;
 	char	*buf;
@@ -50,7 +50,7 @@ static void	alloc_list(t_list **list, int fd)
 	}
 }
 
-static char	*get_line(t_list *list)
+static char	*get_line(t_str_list *list)
 {
 	int		len;
 	char	*line;
@@ -65,10 +65,10 @@ static char	*get_line(t_list *list)
 	return (line);
 }
 
-static void	clear_list_till_nl(t_list **list)
+static void	clear_list_till_nl(t_str_list **list)
 {
-	t_list	*last_node;
-	t_list	*clean_node;
+	t_str_list	*last_node;
+	t_str_list	*clean_node;
 	int		i_con;
 	int		i_buf;
 	char	*buf;
@@ -76,7 +76,7 @@ static void	clear_list_till_nl(t_list **list)
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (NULL == buf)
 		return ;
-	clean_node = (t_list *)malloc(sizeof(t_list));
+	clean_node = (t_str_list *)malloc(sizeof(t_str_list));
 	if (NULL == clean_node)
 	{
 		free(buf);
@@ -96,7 +96,7 @@ static void	clear_list_till_nl(t_list **list)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*list = NULL;
+	static t_str_list	*list = NULL;
 	char			*next_line;
 
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, &next_line, 0) < 0)
